@@ -144,4 +144,5 @@ public class EventServiceTest {
         assertNotNull(result);
         assertTrue(result.isEmpty());
     }
+
 }

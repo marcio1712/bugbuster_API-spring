@@ -77,4 +77,48 @@ public class EventService implements IEvent {
         }
         return purchasedEvents;
     }
+    private EventService eventService;
+
+    @BeforeEach
+    void setUp() {
+        eventService = new EventService();
+    }
+
+    @Test
+    @DisplayName("Deve converter um Event para EventDTO")
+    void testConvertToDTO() {
+        // Criação do objeto Event
+        Event event = new Event();
+        event.setId(1L);
+        event.setName("Evento Teste");
+        event.setAcronym("ET");
+
+        // Executa a conversão
+        EventDTO eventDTO = eventService.convertToDTO(event);
+
+        // Verifica o resultado
+        assertNotNull(eventDTO);
+        assertEquals(1L, eventDTO.getId());
+        assertEquals("Evento Teste", eventDTO.getName());
+        assertEquals("ET", eventDTO.getAcronym());
+    }
+
+    @Test
+    @DisplayName("Deve converter um EventDTO para Event")
+    void testConvertToEntity() {
+        // Criação do objeto EventDTO
+        EventDTO eventDTO = new EventDTO();
+        eventDTO.setId(1L);
+        eventDTO.setName("Evento Teste");
+        eventDTO.setAcronym("ET");
+
+        // Executa a conversão
+        Event event = EventService.convertToEntity(eventDTO);
+
+        // Verifica o resultado
+        assertNotNull(event);
+        assertEquals(1L, event.getId());
+        assertEquals("Evento Teste", event.getName());
+        assertEquals("ET", event.getAcronym());
+    }
 }
