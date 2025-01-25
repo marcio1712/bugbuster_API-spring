@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-spring/organiza-app.iml" filepath="$PROJECT_DIR$/api-spring/organiza-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/trabalho-pratico-grupo-trabalho-bandejao.iml" filepath="$PROJECT_DIR$/.idea/trabalho-pratico-grupo-trabalho-bandejao.iml" />
     </modules>
   </component>
