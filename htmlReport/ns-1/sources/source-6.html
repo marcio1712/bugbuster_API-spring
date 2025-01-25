@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.devapi.api.service.classes</a>
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.devapi.api.service.classes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.devapi.api.service.classes;
+&nbsp;
+&nbsp;import com.devapi.api.domain.dtos.UserDTO;
+&nbsp;import com.devapi.api.domain.model.UserKey;
+&nbsp;import com.devapi.api.domain.model.User;
+&nbsp;import com.devapi.api.service.interfaces.IUser;
+&nbsp;import org.modelmapper.ModelMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class UserService implements IUser {</b>
+&nbsp;    @Autowired
+<b class="nc">&nbsp;    private static ModelMapper modelMapper = new ModelMapper();</b>
+&nbsp;
+&nbsp;    public UserDTO convertToDTO(User user) {
+<b class="nc">&nbsp;        return modelMapper.map(user, UserDTO.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static User convertToEntity(UserDTO userDTO) {
+<b class="nc">&nbsp;        return modelMapper.map(userDTO, User.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Método responsável por válidar um usuário com a
+&nbsp;     * @param user o usuário que será verificado.
+&nbsp;     * @param userKeys a lista de keys cadastradas no banco de dados.
+&nbsp;     * @return um boolean que retorna se o usuário está validado ou não.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public boolean validate(User user, List&lt;UserKey&gt; userKeys) {
+<b class="nc">&nbsp;        return validateImpl(user, userKeys);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Método responsável por verificar se um usuário possui a key de autorização para cadastrar um evento.
+&nbsp;     * @param user o usuário que será verificado.
+&nbsp;     * @param userKeys a lista de keys cadastradas no banco de dados.
+&nbsp;     * @return um boolean que retorna se o usuário está validado ou não.
+&nbsp;     */
+&nbsp;    private boolean validateImpl(User user, List&lt;UserKey&gt; userKeys){
+&nbsp;
+<b class="nc">&nbsp;        for(UserKey element : userKeys){</b>
+<b class="nc">&nbsp;            if(element.getUser().getEmail().equals(user.getEmail())){</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean validateEmail(String email){
+<b class="nc">&nbsp;        return validateEmailImpl(email);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean validateEmailImpl(String email){
+<b class="nc">&nbsp;        if(email.contains(&quot;@&quot;)){</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-25 18:07</div>
+</div>
+</body>
+</html>
