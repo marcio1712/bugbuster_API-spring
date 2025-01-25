@@ -184,5 +184,51 @@ public class EventServiceTest {
         assertEquals("Evento Teste", event.getName());
         assertEquals("ET", event.getAcronym());
     }
+    @Test
+    @DisplayName("Deve lançar exceção quando a lista de avaliações for nula")
+    void testFindRatingsByEventId_NullRatingsList() {
+        // Configuração
+        when(mockEvent.getId()).thenReturn(1L);
+
+        // Verificação
+        assertThrows(NullPointerException.class, () -> {
+            eventService.findRatingsByEventId(mockEvent, null);
+        });
+    }
+    @Test
+    @DisplayName("Deve lançar exceção para evento inválido (sem ID)")
+    void testFindRatingsByEventId_InvalidEvent() {
+        // Configuração
+        Event invalidEvent = new Event();
+
+        // Verificação
+        assertThrows(NullPointerException.class, () -> {
+            eventService.findRatingsByEventId(invalidEvent, ratings);
+        });
+    }
+    @Test
+    @DisplayName("Deve retornar uma lista vazia quando nenhuma avaliação corresponder ao evento")
+    void testFindRatingsByEventId_NoMatchingRatings() throws RatingNotFoundException {
+        // Configuração
+        when(mockEvent.getId()).thenReturn(1L);
+
+        Rating rating1 = new Rating();
+        rating1.setEvent(new Event());
+        rating1.getEvent().setId(2L); // ID diferente
+
+        Rating rating2 = new Rating();
+        rating2.setEvent(new Event());
+        rating2.getEvent().setId(3L); // ID diferente
+
+        ratings.add(rating1);
+        ratings.add(rating2);
+
+        // Chamada do método
+        List<Rating> result = eventService.findRatingsByEventId(mockEvent, ratings);
+
+        // Verificações
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
 
 }
