@@ -203,4 +203,3 @@ class RatingServiceTest {
         Assertions.assertEquals(ratingDTO.getValue(), rating.getValue(), "O valor da avaliação não corresponde.");
     }
 }
- 
