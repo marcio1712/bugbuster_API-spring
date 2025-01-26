@@ -2,6 +2,7 @@ package com.devapi.api.service.classes;
 
 import com.devapi.api.domain.dtos.RatingDTO;
 import com.devapi.api.domain.model.Rating;
+import com.devapi.api.exception.InvalidRatingValueException; // Importando a exceção
 import com.devapi.api.exception.RatingEmptyException;
 import com.devapi.api.service.interfaces.IRating;
 import org.modelmapper.ModelMapper;
@@ -27,7 +28,7 @@ public class RatingService implements IRating {
      * @return a média calculada.
      */
     @Override
-    public float calculateAverageAvaliation(List<Rating> ratings) throws RatingEmptyException {
+    public float calculateAverageAvaliation(List<Rating> ratings) throws RatingEmptyException, InvalidRatingValueException {
         return calculateAverageRatingImpl(ratings);
     }
 
@@ -36,20 +37,24 @@ public class RatingService implements IRating {
      * @param ratings a lista de avaliações na qual vai ser calculada a média.
      * @return a média calculada.
      */
-    private float calculateAverageRatingImpl(List<Rating> ratings) throws RatingEmptyException {
+    private float calculateAverageRatingImpl(List<Rating> ratings) throws RatingEmptyException, InvalidRatingValueException {
         float soma = 0;
         float media;
-        if(!ratings.isEmpty()){
-            float ratingsSize = ratings.size();
 
-            for(Rating element : ratings){
-                soma += element.getValue();
-            }
-            media = soma / ratingsSize;
-        }
-        else{
+        if (ratings.isEmpty()) {
             throw new RatingEmptyException();
         }
+
+        for (Rating element : ratings) {
+            // Verificando se o valor da avaliação é inválido
+            if (element.getValue() < 0) {
+                throw new InvalidRatingValueException(); // Lançando a exceção personalizada
+            }
+            soma += element.getValue();
+        }
+
+        media = soma / ratings.size();
         return media;
     }
 }
+
