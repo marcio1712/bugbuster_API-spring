@@ -107,9 +107,6 @@ class UserServiceTest {
                 "O método validate deveria lançar exceção para lista de chaves nula.");
     }
 
-    /***
-     * Teste unitário que verifica se o método validate lida corretamente com lista de chaves vazia.
-     */
     @Test
     @DisplayName("Verifica se o o comportamento do método validate com lista de chaves vazia.")
     void TestValidateWithEmptyKeyList() {
@@ -119,9 +116,7 @@ class UserServiceTest {
         Assertions.assertFalse(result, "O método validate deveria retornar false para lista de chaves vazia.");
     }
 
-    /***
-     * Teste unitário que verifica se o método validateEmail retorna falso para e-mails sem arroba.
-     */
+
     @Test
     @DisplayName("Deve retornar FALSO para e-mails sem arroba")
     void TestValidateEmailWithoutAtSymbol() {
@@ -129,9 +124,7 @@ class UserServiceTest {
         Assertions.assertFalse(result, "O método validateEmail deveria retornar false para e-mails sem arroba.");
     }
 
-    /***
-     * Teste unitário que verifica se o método validateEmail retorna verdadeiro para e-mails válidos com subdomínios.
-     */
+    
     @Test
     @DisplayName("Deve retornar VERDADEIRO para e-mails válidos com subdomínios.")
     void TestValidateEmailWithSubdomain() {
