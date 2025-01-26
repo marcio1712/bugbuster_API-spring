@@ -41,4 +41,12 @@ public class EventDTO {
     String acronym;
     String description;
     User user;
+
+    public long getId() { // Getter para o atributo 'id'
+        return id;
+    }
+
+    public void setId(long id) { // Setter para o atributo 'id'
+        this.id = id;
+    }
 }
