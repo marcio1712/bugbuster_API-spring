@@ -22,4 +22,5 @@ public class Rating {
     @ManyToOne
     @JoinColumn(name = "fk_event", nullable=false)
     private Event event;
+
 }
