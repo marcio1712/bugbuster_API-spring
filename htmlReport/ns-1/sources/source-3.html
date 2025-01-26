@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>Coverage Report > SwaggerConfig</title>
+  <title>Coverage Report > RatingService</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope:     <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">com.devapi.api</a>
+    <a href="../index.html">com.devapi.api.service.classes</a>
 </div>
 
-<h1>Coverage Summary for Class: SwaggerConfig (com.devapi.api)</h1>
+<h1>Coverage Summary for Class: RatingService (com.devapi.api.service.classes)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -37,11 +37,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
   Line, %
 </th>
 </tr>
 <tr>
-  <td class="name">SwaggerConfig</td>
+  <td class="name">RatingService</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -55,7 +59,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -63,7 +67,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/9)
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
   </span>
 </td>
 </tr>
@@ -75,40 +87,66 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package com.devapi.api;
+<code class="sourceCode" id="sourceCode">&nbsp;package com.devapi.api.service.classes;
 &nbsp;
-&nbsp;import org.springframework.context.annotation.Bean;
-&nbsp;import org.springframework.context.annotation.Configuration;
+&nbsp;import com.devapi.api.domain.dtos.RatingDTO;
+&nbsp;import com.devapi.api.domain.model.Rating;
+&nbsp;import com.devapi.api.exception.InvalidRatingValueException; // Importando a exceção
+&nbsp;import com.devapi.api.exception.RatingEmptyException;
+&nbsp;import com.devapi.api.service.interfaces.IRating;
+&nbsp;import org.modelmapper.ModelMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
 &nbsp;
-&nbsp;import springfox.documentation.builders.PathSelectors;
-&nbsp;import springfox.documentation.builders.RequestHandlerSelectors;
-&nbsp;import springfox.documentation.spi.DocumentationType;
-&nbsp;import springfox.documentation.spring.web.plugins.Docket;
-&nbsp;import springfox.documentation.swagger.web.OperationsSorter;
-&nbsp;import springfox.documentation.swagger.web.UiConfiguration;
-&nbsp;import springfox.documentation.swagger.web.UiConfigurationBuilder;
-&nbsp;import springfox.documentation.swagger2.annotations.EnableSwagger2;
+&nbsp;import java.util.List;
 &nbsp;
-&nbsp;@Configuration
-&nbsp;@EnableSwagger2
-<b class="nc">&nbsp;public class SwaggerConfig {</b>
-&nbsp;    @Bean
-&nbsp;    public Docket api() {
-<b class="nc">&nbsp;        return new Docket(DocumentationType.SWAGGER_2)</b>
-<b class="nc">&nbsp;          .select()</b>
-<b class="nc">&nbsp;          .apis(RequestHandlerSelectors.any())</b>
-<b class="nc">&nbsp;          .paths(PathSelectors.any())</b>
-<b class="nc">&nbsp;          .build();</b>
+<b class="nc">&nbsp;public class RatingService implements IRating {</b>
+&nbsp;    @Autowired
+<b class="nc">&nbsp;    private static ModelMapper modelMapper = new ModelMapper();</b>
+&nbsp;
+&nbsp;    public RatingDTO convertToDTO(Rating rating) {
+<b class="nc">&nbsp;        return modelMapper.map(rating, RatingDTO.class);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @Bean
-&nbsp;    public UiConfiguration uiConfig() {
-&nbsp;        return UiConfigurationBuilder
-<b class="nc">&nbsp;                .builder()</b>
-<b class="nc">&nbsp;                .operationsSorter(OperationsSorter.METHOD)</b>
-<b class="nc">&nbsp;                .build();</b>
+&nbsp;    public static Rating convertToEntity(RatingDTO ratingDTO) {
+<b class="nc">&nbsp;        return modelMapper.map(ratingDTO, Rating.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Método responsável por retornar a média das avaliações de um certo evento.
+&nbsp;     * @param ratings a lista de avaliações na qual vai ser calculada a média.
+&nbsp;     * @return a média calculada.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public float calculateAverageAvaliation(List&lt;Rating&gt; ratings) throws RatingEmptyException, InvalidRatingValueException {
+<b class="nc">&nbsp;        return calculateAverageRatingImpl(ratings);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Método responsável por toda a implementação de cálculo de média das avaliações.
+&nbsp;     * @param ratings a lista de avaliações na qual vai ser calculada a média.
+&nbsp;     * @return a média calculada.
+&nbsp;     */
+&nbsp;    private float calculateAverageRatingImpl(List&lt;Rating&gt; ratings) throws RatingEmptyException, InvalidRatingValueException {
+<b class="nc">&nbsp;        float soma = 0;</b>
+&nbsp;        float media;
+&nbsp;
+<b class="nc">&nbsp;        if (ratings.isEmpty()) {</b>
+<b class="nc">&nbsp;            throw new RatingEmptyException();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        for (Rating element : ratings) {</b>
+&nbsp;            // Verificando se o valor da avaliação é inválido
+<b class="nc">&nbsp;            if (element.getValue() &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new InvalidRatingValueException(); // Lançando a exceção personalizada</b>
+&nbsp;            }
+<b class="nc">&nbsp;            soma += element.getValue();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        media = soma / ratings.size();</b>
+<b class="nc">&nbsp;        return media;</b>
 &nbsp;    }
 &nbsp;}
+&nbsp;
 </code>
 </pre>
 </div>
@@ -132,7 +170,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-26 00:01</div>
+    <div style="float:right;">generated on 2025-01-26 01:50</div>
 </div>
 </body>
 </html>
