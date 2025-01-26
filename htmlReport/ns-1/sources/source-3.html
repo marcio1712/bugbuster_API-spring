@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RatingService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.devapi.api.service.classes</a>
+</div>
+
+<h1>Coverage Summary for Class: RatingService (com.devapi.api.service.classes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RatingService</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.devapi.api.service.classes;
+&nbsp;
+&nbsp;import com.devapi.api.domain.dtos.RatingDTO;
+&nbsp;import com.devapi.api.domain.model.Rating;
+&nbsp;import com.devapi.api.exception.RatingEmptyException;
+&nbsp;import com.devapi.api.service.interfaces.IRating;
+&nbsp;import org.modelmapper.ModelMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class RatingService implements IRating {</b>
+&nbsp;    @Autowired
+<b class="nc">&nbsp;    private static ModelMapper modelMapper = new ModelMapper();</b>
+&nbsp;
+&nbsp;    public RatingDTO convertToDTO(Rating rating) {
+<b class="nc">&nbsp;        return modelMapper.map(rating, RatingDTO.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Rating convertToEntity(RatingDTO ratingDTO) {
+<b class="nc">&nbsp;        return modelMapper.map(ratingDTO, Rating.class);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Método responsável por retornar a média das avaliações de um certo evento.
+&nbsp;     * @param ratings a lista de avaliações na qual vai ser calculada a média.
+&nbsp;     * @return a média calculada.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public float calculateAverageAvaliation(List&lt;Rating&gt; ratings) throws RatingEmptyException {
+<b class="nc">&nbsp;        return calculateAverageRatingImpl(ratings);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /***
+&nbsp;     * Método responsável por toda a implementação de cálculo de média das avaliações.
+&nbsp;     * @param ratings a lista de avaliações na qual vai ser calculada a média.
+&nbsp;     * @return a média calculada.
+&nbsp;     */
+&nbsp;    private float calculateAverageRatingImpl(List&lt;Rating&gt; ratings) throws RatingEmptyException {
+<b class="nc">&nbsp;        float soma = 0;</b>
+&nbsp;        float media;
+<b class="nc">&nbsp;        if(!ratings.isEmpty()){</b>
+<b class="nc">&nbsp;            float ratingsSize = ratings.size();</b>
+&nbsp;
+<b class="nc">&nbsp;            for(Rating element : ratings){</b>
+<b class="nc">&nbsp;                soma += element.getValue();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            media = soma / ratingsSize;</b>
+&nbsp;        }
+&nbsp;        else{
+<b class="nc">&nbsp;            throw new RatingEmptyException();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return media;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-25 20:57</div>
+</div>
+</body>
+</html>
