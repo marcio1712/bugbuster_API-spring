@@ -202,7 +202,7 @@ public class EventServiceTest {
         Event invalidEvent = new Event();
 
         // Verificação
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(RatingNotFoundException.class, () -> {
             eventService.findRatingsByEventId(invalidEvent, ratings);
         });
     }
