@@ -16,20 +16,71 @@ public class EditionServiceTest {
     private EditionService editionService = new EditionService();
 
     @Test
-    void testeSimples(){
-        int resultado = 5 + 5;
-        assertEquals(10, resultado);
+    @DisplayName("Simulando edição que já aconteceu.")
+    void testeRetornaCONCLUDEDseDataMaiorQueDataFinal() {
+        Edition edition = new Edition();
+        edition.setFinalDate(Date.valueOf("2025-01-25"));
+        System.out.println("[Retorna Concluido] - Atual status da edição: " + edition.getStatus());
+        edition.setStatus(EditionStatus.CONFIRMED);
+
+        assertEquals(EditionStatus.CONCLUDED, editionService.verifyEditionStatus(edition, Date.valueOf("2025-01-26"))); //Análise de Valor Limite ( Dia compara Dia + 1 )
     }
 
     @Test
-    @DisplayName("Retorna Concluido")
-    void testeStatusConcluido(){
+    @DisplayName("Simulando edição que ainda vai acontecer.")
+    void testeRetornaCONDFIRMEDseDataMenorQueDataFinal() {
         Edition edition = new Edition();
-        edition.setFinalDate(Date.valueOf("2024-01-25"));
-        edition.setStatus(EditionStatus.CONFIRMED);
+        edition.setFinalDate(Date.valueOf("2025-01-27"));
+        System.out.println("[Retorna Confirmado] - Atual status da edição: " + edition.getStatus());
+        edition.setStatus(EditionStatus.CONCLUDED);
 
-        assertEquals(EditionStatus.CONCLUDED, editionService.verifyEditionStatus(edition, Date.valueOf("2024-01-26")));
+        assertEquals(EditionStatus.CONFIRMED, editionService.verifyEditionStatus(edition, Date.valueOf("2025-1-26"))); //Análise de Valor Limite ( Dia compara Dia - 1 )
     }
 
+    @Test
+    @DisplayName("Simulando edição acontecendo na data atual.")
+    void testeRetornaCONFIRMEDseDataIgualaDataFinal() {
+        Edition edition = new Edition();
+        edition.setFinalDate(Date.valueOf("2025-01-26"));
+        System.out.println("[Retorna Confirmado] - Atual status da edição: " + edition.getStatus());
+        edition.setStatus(EditionStatus.CONCLUDED);
+
+        assertEquals(EditionStatus.CONFIRMED, editionService.verifyEditionStatus(edition, Date.valueOf("2025-01-26"))); //Análise de Valor Limite ( Dia compara Dia )
+    }
+
+    @Test
+    @DisplayName("Simulando edição cancelada com data que já passou.")
+    void testeRetornaCANCELEDseStatusSetadoCancelado_1() {
+        Edition edition = new Edition();
+        edition.setFinalDate(Date.valueOf("2025-01-25"));
+        System.out.println("[Retorna Cancelado] - Atual status da edição: " + edition.getStatus());
+        edition.setStatus(EditionStatus.CANCELED);
+
+        assertEquals(EditionStatus.CANCELED, editionService.verifyEditionStatus(edition, Date.valueOf("2025-01-26"))); //Classe de Equivalência (CANCELED)
+    }
+
+    @Test
+    @DisplayName("Simulando edição cancelada com data futura.")
+    void testeRetornaCANCELEDseStatusSetadoCancelado_2() {
+        Edition edition = new Edition();
+        edition.setFinalDate(Date.valueOf("2025-01-27"));
+        System.out.println("[Retorna Cancelado] - Atual status da edição: " + edition.getStatus());
+        edition.setStatus(EditionStatus.CANCELED);
+
+        assertEquals(EditionStatus.CANCELED, editionService.verifyEditionStatus(edition, Date.valueOf("2025-01-26"))); //Classe de Equivalência (CANCELED)
+    }
+
+    @Test
+    @DisplayName("Simulando edição sem status setado.")
+    void testeRetornaCANCELEDseStatusIgualNull() {
+        Edition edition = new Edition();
+        edition.setFinalDate(Date.valueOf("2025-01-27"));
+        System.out.println("[Retorna Cancelado] - Atual status da edição: " + edition.getStatus());
+
+        //A requisição post não deixa criar uma edição com status null (status é setado como CONFIRMED)
+        //Teste apenas para validar logica
+
+        assertEquals(EditionStatus.CANCELED, editionService.verifyEditionStatus(edition, Date.valueOf("2025-01-26")));
+    }
 
 }
