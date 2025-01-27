@@ -4,8 +4,6 @@ import com.devapi.api.domain.model.Event;
 import com.devapi.api.domain.model.Rating;
 import com.devapi.api.domain.model.User;
 import com.devapi.api.domain.dtos.RatingDTO;
-import com.devapi.api.domain.dtos.EventDTO;
-import com.devapi.api.domain.dtos.UserDTO;
 import com.devapi.api.exception.InvalidRatingValueException;
 import com.devapi.api.exception.RatingEmptyException;
 import com.devapi.api.service.classes.RatingService;
@@ -23,9 +21,6 @@ class RatingServiceTest {
     private Rating rating2;
     private Rating rating3;
 
-    @BeforeAll
-    public static void setupAll() {
-    }
 
     @BeforeEach
     void setUp() {
@@ -164,7 +159,7 @@ class RatingServiceTest {
     @Test
     @DisplayName("Simula calculo media de multiplos eventos")
     void testCalculateAverageWithMultipleEvents() throws RatingEmptyException, InvalidRatingValueException {
-        User user = new User(1L, "BrunoCotelo", "Bruno Cotelo", "cotelo@gmail.com", "ADMIN");
+        User user = new User(1L, "Lucca", "Lucca Franca", "lucca@id.uff", "ADMIN");
         Event event1 = new Event(0L, "Evento 1", "ET1", "Teste evento 1", user);
         Event event2 = new Event(1L, "Evento 2", "ET2", "Teste evento 2", user);
 
