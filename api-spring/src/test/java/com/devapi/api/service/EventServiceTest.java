@@ -31,7 +31,7 @@ class EventServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar uma lista de avaliações de um evento válido")
+    @DisplayName("Deve retornar uma lista de avaliações de um evento válido - Teste de Estrutura")
     void testFindRatingsByEventId_ValidEvent() throws RatingNotFoundException {
         // Configuração do evento
         when(mockEvent.getId()).thenReturn(1L);
@@ -58,7 +58,7 @@ class EventServiceTest {
     }
 
     @Test
-    @DisplayName("Deve lançar exceção quando não houver avaliações para o evento")
+    @DisplayName("Deve lançar exceção quando não houver avaliações para o evento - Teste Negativo")
     void testFindRatingsByEventId_EmptyRatingsList() {
         when(mockEvent.getId()).thenReturn(1L);
 
@@ -68,7 +68,7 @@ class EventServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar eventos comprados por um usuário válido")
+    @DisplayName("Deve retornar eventos comprados por um usuário válido - Teste Funcional")
     void testReturnPurchasedEvents_ValidUser() {
         // Configuração de eventos e ingressos
         Event event1 = new Event();
@@ -106,7 +106,7 @@ class EventServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar uma lista vazia quando o usuário não possui ingressos")
+    @DisplayName("Deve retornar uma lista vazia quando o usuário não possui ingressos - Teste Limite Inferior")
     void testReturnPurchasedEvents_NoTickets() {
         // Configuração de uma lista vazia
         tickets.clear();
@@ -120,7 +120,7 @@ class EventServiceTest {
     }
 
     @Test
-    @DisplayName("Deve retornar uma lista vazia quando o usuário não corresponde aos ingressos")
+    @DisplayName("Deve retornar uma lista vazia quando o usuário não corresponde aos ingressos - Teste de Estrutura")
     void testReturnPurchasedEvents_UserNotFound() {
         // Configuração de eventos e ingressos para outro usuário
         Event event1 = new Event();
@@ -148,7 +148,7 @@ class EventServiceTest {
 
 
     @Test
-    @DisplayName("Deve converter um Event para EventDTO")
+    @DisplayName("Deve converter um Event para EventDTO - Teste de Conversão")
     void testConvertToDTO() {
         // Criação do objeto Event
         Event event = new Event();
@@ -167,7 +167,7 @@ class EventServiceTest {
     }
 
     @Test
-    @DisplayName("Deve converter um EventDTO para Event")
+    @DisplayName("Deve converter um EventDTO para Event - Teste de Conversão")
     void testConvertToEntity() {
         // Criação do objeto EventDTO
         EventDTO eventDTO = new EventDTO();
@@ -185,7 +185,7 @@ class EventServiceTest {
         assertEquals("ET", event.getAcronym());
     }
     @Test
-    @DisplayName("Deve lançar exceção quando a lista de avaliações for nula")
+    @DisplayName("Deve lançar exceção quando a lista de avaliações for nula - Teste de Exceção")
     void testFindRatingsByEventId_NullRatingsList() {
         // Configuração
         when(mockEvent.getId()).thenReturn(1L);
@@ -196,7 +196,7 @@ class EventServiceTest {
         });
     }
     @Test
-    @DisplayName("Deve lançar exceção para evento inválido (sem ID)")
+    @DisplayName("Deve lançar exceção para evento inválido (sem ID) - Teste de Validação")
     void testFindRatingsByEventId_InvalidEvent() {
         // Configuração
         Event invalidEvent = new Event();
@@ -207,7 +207,7 @@ class EventServiceTest {
         });
     }
     @Test
-    @DisplayName("Deve retornar uma lista vazia quando nenhuma avaliação corresponder ao evento")
+    @DisplayName("Deve retornar uma lista vazia quando nenhuma avaliação corresponder ao evento - Teste de Valor Limite")
     void testFindRatingsByEventId_NoMatchingRatings() throws RatingNotFoundException {
         // Configuração
         when(mockEvent.getId()).thenReturn(1L);
