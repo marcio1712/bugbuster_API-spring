@@ -1,0 +1,384 @@
+{
+	"info": {
+		"_postman_id": "7b339d64-9247-44b8-b632-1eefc865df5d",
+		"name": "Sistema API Eventos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29514150"
+	},
+	"item": [
+		{
+			"name": "Cadastro Usuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsIm5iZiI6MTY3MTM4MTY2MCwicm9sZXMiOiJBRE1JTiIsImV4cCI6MTY3MTQ2ODA2MCwidXNlcklkIjoiMSIsInVzZXJuYW1lIjoidXNlcjEifQ.i2j3F3n7VS_Jwi0fURWbsqH5E55VI9aGgInNkDBu82rDmeYvh15RkZcnOtm9_D1lIJzpVXF8PjJhi20FKk0jZmYCjhZONp4_s9HLi6o2nzBAlq5ALqg1Xpc4eRWfaxRIasOxF3zCycdBAwf1CEXry-NzZYDfCr7ZOd1GKe_Z7DcPAxr4pvi6Tlok36b5TbB0agZASGVuKlcQHPcG6_dWM3L_lN33Y2Q_TkwcDgxXCrK1oDc3aKm3cGRyCAyNLlNNWC3BGrGKmffiprsCGvNsKai8ODK5UXSPv1eh9u-E_o3Us6t9E_y878qjTOu9VNmon7DDuv9EOkaEKfP37cS7aw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\" : \"thalesxpt\",\r\n    \"email\" : \"thales@email.com\",\r\n    \"name\" : \"Thales Soares\",\r\n    \"afiliacao\" : \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Keys",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsIm5iZiI6MTY3MTM4MTY2MCwicm9sZXMiOiJBRE1JTiIsImV4cCI6MTY3MTQ2ODA2MCwidXNlcklkIjoiMSIsInVzZXJuYW1lIjoidXNlcjEifQ.i2j3F3n7VS_Jwi0fURWbsqH5E55VI9aGgInNkDBu82rDmeYvh15RkZcnOtm9_D1lIJzpVXF8PjJhi20FKk0jZmYCjhZONp4_s9HLi6o2nzBAlq5ALqg1Xpc4eRWfaxRIasOxF3zCycdBAwf1CEXry-NzZYDfCr7ZOd1GKe_Z7DcPAxr4pvi6Tlok36b5TbB0agZASGVuKlcQHPcG6_dWM3L_lN33Y2Q_TkwcDgxXCrK1oDc3aKm3cGRyCAyNLlNNWC3BGrGKmffiprsCGvNsKai8ODK5UXSPv1eh9u-E_o3Us6t9E_y878qjTOu9VNmon7DDuv9EOkaEKfP37cS7aw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"keyUser\": \"12345\",\r\n    \"user\": {\r\n        \"id\": 1\r\n    }    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/keys",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Evento",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsIm5iZiI6MTY3MTM4MTY2MCwicm9sZXMiOiJBRE1JTiIsImV4cCI6MTY3MTQ2ODA2MCwidXNlcklkIjoiMSIsInVzZXJuYW1lIjoidXNlcjEifQ.i2j3F3n7VS_Jwi0fURWbsqH5E55VI9aGgInNkDBu82rDmeYvh15RkZcnOtm9_D1lIJzpVXF8PjJhi20FKk0jZmYCjhZONp4_s9HLi6o2nzBAlq5ALqg1Xpc4eRWfaxRIasOxF3zCycdBAwf1CEXry-NzZYDfCr7ZOd1GKe_Z7DcPAxr4pvi6Tlok36b5TbB0agZASGVuKlcQHPcG6_dWM3L_lN33Y2Q_TkwcDgxXCrK1oDc3aKm3cGRyCAyNLlNNWC3BGrGKmffiprsCGvNsKai8ODK5UXSPv1eh9u-E_o3Us6t9E_y878qjTOu9VNmon7DDuv9EOkaEKfP37cS7aw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Festa do Lucca\",\r\n    \"acronym\": \"FC\",\r\n    \"description\": \"Evento do Lucca\",\r\n    \"user\": {\r\n        \"id\": 1,\r\n        \"login\": \"beatrizdellatorre\",\r\n        \"name\": \"Bia Dellatorre\",\r\n        \"email\": \"biadastorre@id.uff.br\",\r\n        \"afiliacao\": \"admin\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Edição",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": 2025,\r\n    \"city\": \"Rio de Janeiro\",\r\n    \"initialDate\": \"2022-10-01\",\r\n    \"finalDate\": \"2022-10-15\",\r\n    \"event\": {\r\n        \"id\": 2,\r\n        \"name\": \"Festa do Lucca\",\r\n        \"acronym\": \"FC\",\r\n        \"description\": \"Evento do Lucca\",\r\n        \"user\": {\r\n            \"id\": 1,\r\n            \"login\": \"beatrizdellatorre\",\r\n            \"name\": \"Bia Dellatorre\",\r\n            \"email\": \"biadastorre@id.uff.br\",\r\n            \"afiliacao\": \"admin\"\r\n        }\r\n    },\r\n  \"number\": 1,\r\n  \"status\": \"CONFIRMED\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/editions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"editions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"id\": 1\r\n    },\r\n    \"edition\": {\r\n        \"id\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Avaliação",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 5,\r\n    \"event\": {\r\n        \"id\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ratings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todos Usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Keys",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsIm5iZiI6MTY3MTM4MTY2MCwicm9sZXMiOiJBRE1JTiIsImV4cCI6MTY3MTQ2ODA2MCwidXNlcklkIjoiMSIsInVzZXJuYW1lIjoidXNlcjEifQ.i2j3F3n7VS_Jwi0fURWbsqH5E55VI9aGgInNkDBu82rDmeYvh15RkZcnOtm9_D1lIJzpVXF8PjJhi20FKk0jZmYCjhZONp4_s9HLi6o2nzBAlq5ALqg1Xpc4eRWfaxRIasOxF3zCycdBAwf1CEXry-NzZYDfCr7ZOd1GKe_Z7DcPAxr4pvi6Tlok36b5TbB0agZASGVuKlcQHPcG6_dWM3L_lN33Y2Q_TkwcDgxXCrK1oDc3aKm3cGRyCAyNLlNNWC3BGrGKmffiprsCGvNsKai8ODK5UXSPv1eh9u-E_o3Us6t9E_y878qjTOu9VNmon7DDuv9EOkaEKfP37cS7aw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/keys",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todos Eventos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Edições",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/editions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"editions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todos Tickets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas Avaliações",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ratings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ratings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Evento",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/events/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"events",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Edição",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/editions/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"editions",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

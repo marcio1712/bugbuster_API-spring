@@ -1,6 +1,6 @@
 package com.devapi.api.service;
 
-import com.devapi.api.domain.dtos.UserDTO;
+
 import com.devapi.api.domain.model.UserKey;
 import com.devapi.api.domain.model.User;
 import com.devapi.api.service.classes.UserService;
@@ -42,7 +42,7 @@ class UserServiceTest {
     @DisplayName("Deve retornar VERDADEIRO para e-mails válidos")
     void TestValidateEmailValid() {
         boolean result = userService.validateEmail("zcouve@exemplo.com");
-        Assertions.assertTrue(result);
+        Assertions.assertTrue(result); // Critério: Classe de Equivalência (CE) - Entrada válida.
     }
 
     @Test
@@ -56,7 +56,7 @@ class UserServiceTest {
 
         boolean userValidate = userService.validate(user, userKeys);
 
-        Assertions.assertFalse(userValidate);
+        Assertions.assertFalse(userValidate); // Critério: Classe de Equivalência (CE) - Entrada inválida.
     }
 
     @Test
@@ -68,7 +68,7 @@ class UserServiceTest {
 
         boolean userValidate = userService.validate(user, userKeys);
 
-        Assertions.assertFalse(userValidate);
+        Assertions.assertFalse(userValidate);  // Critério: Classe de Equivalência (CE) - Lista vazia é uma classe específica de entrada.
     }
 
     @Test
@@ -81,7 +81,7 @@ class UserServiceTest {
 
         boolean userValidate = userService.validate(user, userKeys);
 
-        Assertions.assertTrue(userValidate);
+        Assertions.assertTrue(userValidate); // Critério: Classe de Equivalência (CE) - Entradas com duplicação.
     }
 
     @Test
@@ -90,14 +90,14 @@ class UserServiceTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             userService.convertToDTO(null);
         }, "O método convertToDTO deve lançar uma exceção quando o usuário for nulo.");
-    }
+    } // Critério: Classe de Equivalência (CE) - Entrada inválida (nulo).
 
     @Test
     @DisplayName("Verifica se o método validateEmail lança exceção quando o email é nulo.")
     void TestValidateEmailThrowsExceptionWithNull() {
         Assertions.assertThrows(NullPointerException.class, () -> userService.validateEmail(null),
                 "O método validateEmail deveria lançar exceção para entradas nulas.");
-    }
+    } // Critério: Classe de Equivalência (CE) - Entrada inválida (nulo).
 
     @Test
     @DisplayName("Verifica se o o comportamento do método validate com lista de chaves nula.")
@@ -105,7 +105,7 @@ class UserServiceTest {
         User user = new User(1L, "Zcouve", "Zé das Couves", "zcouve@exemplo.com", "ADMIN");
         Assertions.assertThrows(NullPointerException.class, () -> userService.validate(user, null),
                 "O método validate deveria lançar exceção para lista de chaves nula.");
-    }
+    } // Critério: Classe de Equivalência (CE) - Entrada inválida (lista nula).
 
     @Test
     @DisplayName("Verifica se o o comportamento do método validate com lista de chaves vazia.")
@@ -114,7 +114,7 @@ class UserServiceTest {
         boolean result = userService.validate(user, new ArrayList<>());
 
         Assertions.assertFalse(result, "O método validate deveria retornar false para lista de chaves vazia.");
-    }
+    }  // Critério: Classe de Equivalência (CE) - Lista vazia.
 
 
     @Test
@@ -122,7 +122,7 @@ class UserServiceTest {
     void TestValidateEmailWithoutAtSymbol() {
         boolean result = userService.validateEmail("lala.email.com");
         Assertions.assertFalse(result, "O método validateEmail deveria retornar false para e-mails sem arroba.");
-    }
+    } // Critério: Classe de Equivalência (CE) - Entrada inválida (falta de '@').
 
 
     @Test
@@ -130,5 +130,5 @@ class UserServiceTest {
     void TestValidateEmailWithSubdomain() {
         boolean result = userService.validateEmail("usuario@sub.dominio.com");
         Assertions.assertTrue(result, "O método validateEmail deveria retornar true para e-mails válidos com subdomínios.");
-    }
+    } // Critério: Classe de Equivalência (CE) - Entrada válida (e-mails com subdomínios).
 }

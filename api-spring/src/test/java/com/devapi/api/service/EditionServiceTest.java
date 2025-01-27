@@ -12,20 +12,17 @@ import org.junit.jupiter.api.Test;
 import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class EditionServiceTest {
+class EditionServiceTest {
 
     private EditionService editionService = new EditionService();
     private EditionDTO editionDTO;
     private User user;
     private Event event;
-    private UserKey userKey;
 
     @BeforeEach
     void setUp(){
         user = new User(1L, "thaleco1", "Thales1", "thaleco1@email.com", "admin");
-        userKey = new UserKey(1L, "100000", user);
         event = new Event(1L, "FestaThaleco1", "FT1", "Primeira festa", user);
 
         editionDTO = new EditionDTO();

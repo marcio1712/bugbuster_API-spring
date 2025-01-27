@@ -4,12 +4,12 @@ import com.devapi.api.domain.model.Event;
 import com.devapi.api.domain.model.Rating;
 import com.devapi.api.domain.model.User;
 import com.devapi.api.domain.dtos.RatingDTO;
+import com.devapi.api.domain.dtos.EventDTO;
+import com.devapi.api.domain.dtos.UserDTO;
 import com.devapi.api.exception.InvalidRatingValueException;
 import com.devapi.api.exception.RatingEmptyException;
 import com.devapi.api.service.classes.RatingService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +23,9 @@ class RatingServiceTest {
     private Rating rating2;
     private Rating rating3;
 
+    @BeforeAll
+    public static void setupAll() {
+    }
 
     @BeforeEach
     void setUp() {
@@ -38,18 +41,7 @@ class RatingServiceTest {
     }
 
     @Test
-    void TestCalculateAverage() throws RatingEmptyException, InvalidRatingValueException {
-        ratings.add(rating1);
-        ratings.add(rating2);
-        ratings.add(rating3);
-        float expectedAverage = (5 + 4 + 3) / 3f;
-
-        float actualAverage = ratingService.calculateAverageAvaliation(ratings);
-
-        Assertions.assertEquals(expectedAverage, actualAverage, "A média calculada está incorreta.");
-    }
-
-    @Test
+    @DisplayName("Simula calculo de media com valores validos")
     void testCalculateAverageAvaliationWithValidRatings() throws RatingEmptyException, InvalidRatingValueException {
         ratings.add(rating1);
         ratings.add(rating2);
@@ -62,6 +54,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media sem valores")
     void testCalculateAverageAvaliationWithEmptyList() {
         Assertions.assertThrows(RatingEmptyException.class, () -> {
             ratingService.calculateAverageAvaliation(Collections.emptyList());
@@ -69,6 +62,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com um valor")
     void testCalculateAverageAvaliationWithSingleRating() throws RatingEmptyException, InvalidRatingValueException {
         ratings.add(rating1);
         float expectedAverage = 5f;
@@ -79,6 +73,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com valores trocados")
     void testCalculateAverageWithMixedRatings() throws RatingEmptyException, InvalidRatingValueException {
         ratings.add(rating1);
         ratings.add(new Rating(3L, 1, rating1.getEvent()));
@@ -92,6 +87,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com valor invalido")
     void testCalculateAverageWithInvalidRatings() {
         ratings.add(new Rating(0L, -1, rating1.getEvent()));
         ratings.add(rating2);
@@ -102,6 +98,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com valor nulo")
     void testCalculateAverageWithNullRating() {
         ratings.add(new Rating(0L, 5, rating1.getEvent()));
         ratings.add(null);
@@ -112,6 +109,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com valor igual a zero")
     void testCalculateAverageWithZeroValueRatings() throws RatingEmptyException, InvalidRatingValueException {
         ratings.add(new Rating(0L, 0, rating1.getEvent()));
         ratings.add(new Rating(1L, 3, rating1.getEvent()));
@@ -122,6 +120,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com valores altos")
     void testCalculateAverageWithHighRatings() throws RatingEmptyException, InvalidRatingValueException {
         ratings.add(new Rating(0L, 1000, rating1.getEvent()));
         ratings.add(new Rating(1L, 999, rating1.getEvent()));
@@ -135,6 +134,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com valores iguais")
     void testCalculateAverageWithEqualRatings() throws RatingEmptyException, InvalidRatingValueException {
         ratings.add(new Rating(0L, 4, rating1.getEvent()));
         ratings.add(new Rating(1L, 4, rating1.getEvent()));
@@ -148,6 +148,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media com muitos valores")
     void testCalculateAverageWithLargeNumberOfRatings() throws RatingEmptyException, InvalidRatingValueException {
         for (int i = 0; i < 10000; i++) {
             ratings.add(new Rating((long) i, 5, rating1.getEvent()));
@@ -161,8 +162,9 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula calculo media de multiplos eventos")
     void testCalculateAverageWithMultipleEvents() throws RatingEmptyException, InvalidRatingValueException {
-        User user = new User(1L, "Lucca", "Lucca Franca", "lucca@id.uff", "ADMIN");
+        User user = new User(1L, "BrunoCotelo", "Bruno Cotelo", "cotelo@gmail.com", "ADMIN");
         Event event1 = new Event(0L, "Evento 1", "ET1", "Teste evento 1", user);
         Event event2 = new Event(1L, "Evento 2", "ET2", "Teste evento 2", user);
 
@@ -178,6 +180,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula conversao para DTO")
     void testConvertToDTO() {
         Rating rating = new Rating(1L, 5, new Event(0L, "Evento Teste", "ET", "Teste", new User()));
 
@@ -188,6 +191,7 @@ class RatingServiceTest {
     }
 
     @Test
+    @DisplayName("Simula conversao para Entidade")
     void testConvertToEntity() {
         RatingDTO ratingDTO = new RatingDTO(1L, 5, new Event(0L, "Evento Teste", "ET", "Teste", new User()));
 
