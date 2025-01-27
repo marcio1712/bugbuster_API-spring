@@ -124,7 +124,7 @@ class UserServiceTest {
         Assertions.assertFalse(result, "O método validateEmail deveria retornar false para e-mails sem arroba.");
     }
 
-    
+
     @Test
     @DisplayName("Deve retornar VERDADEIRO para e-mails válidos com subdomínios.")
     void TestValidateEmailWithSubdomain() {
