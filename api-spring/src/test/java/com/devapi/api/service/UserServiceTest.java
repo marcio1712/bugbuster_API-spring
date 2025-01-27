@@ -1,6 +1,6 @@
 package com.devapi.api.service;
 
-import com.devapi.api.domain.dtos.UserDTO;
+
 import com.devapi.api.domain.model.UserKey;
 import com.devapi.api.domain.model.User;
 import com.devapi.api.service.classes.UserService;
