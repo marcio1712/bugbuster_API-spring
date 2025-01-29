@@ -6,7 +6,6 @@ import com.devapi.api.domain.model.Rating;
 import com.devapi.api.domain.model.Ticket;
 import com.devapi.api.exception.RatingNotFoundException;
 import com.devapi.api.repository.RatingRepository;
-import com.devapi.api.repository.TicketRepository;
 import com.devapi.api.service.interfaces.IEvent;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

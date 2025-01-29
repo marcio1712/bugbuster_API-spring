@@ -1,7 +1,6 @@
 package com.devapi.api.controller;
 
 import com.devapi.api.domain.dtos.UserDTO;
-import com.devapi.api.domain.model.Event;
 import com.devapi.api.domain.model.User;
 
 import com.devapi.api.service.classes.UserService;

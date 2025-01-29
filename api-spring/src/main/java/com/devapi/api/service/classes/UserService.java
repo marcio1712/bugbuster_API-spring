@@ -53,9 +53,6 @@ public class UserService implements IUser {
     }
 
     private boolean validateEmailImpl(String email){
-        if(email.contains("@")){
-            return true;
-        }
-        return false;
+        return email.contains("@");
     }
 }

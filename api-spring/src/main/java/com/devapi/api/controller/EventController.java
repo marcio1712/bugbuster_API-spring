@@ -1,7 +1,6 @@
 package com.devapi.api.controller;
 
 import com.devapi.api.domain.dtos.EventDTO;
-import com.devapi.api.domain.model.Edition;
 import com.devapi.api.domain.model.Event;
 import com.devapi.api.domain.model.Ticket;
 import com.devapi.api.repository.EventRepository;
@@ -9,7 +8,6 @@ import com.devapi.api.repository.KeyRepository;
 
 import com.devapi.api.repository.TicketRepository;
 import com.devapi.api.repository.UserRepository;
-import com.devapi.api.service.classes.EditionService;
 import com.devapi.api.service.classes.EventService;
 import com.devapi.api.service.classes.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +57,7 @@ public class EventController {
      * @return Lista de eventos em que o usuário está cadastrado
      */
 
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<Event>> eventsBoughtByUser(@PathVariable("userId") long userId){
         if(userRepository.existsById(userId)) {
             List<Ticket> allTickets = ticketRepository.findAll();
