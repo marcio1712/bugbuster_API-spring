@@ -1,0 +1,2 @@
+Inicialmente as correções do SonarQube foram feitas em cima das classes de teste. Notamos que isso não foi o solicitado então fizemos mais correções em cima de todo o src/main/java. 
+A única exceção que se manteve foi a injeção de dependência que notamos ser muito comum em projetos com spring se usar o @AutoWired e por isso resolvemos manter no projeto.
