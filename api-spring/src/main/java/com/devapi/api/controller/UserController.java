@@ -31,8 +31,6 @@ public class UserController {
     @Autowired
     private EditionRepository editionRepository;
 
-    private UserService userService = new UserService();
-
     @PostMapping
     public ResponseEntity<User> create(@RequestBody UserDTO userDTO){
         User user = UserService.convertToEntity(userDTO);
